@@ -1,0 +1,21 @@
+---
+# tasks file for installPlex
+- name: Add apt-key for Plex
+  apt_key:
+    url: "http://shell.ninthgate.se/packages/shell.ninthgate.se.gpg.key"
+    state: present
+
+- name: Add plex.list in sources.list.d
+  template:
+    src: plex.list.j2
+    dest: /etc/apt/sources.list.d/plex.list
+    owner: root
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
+- name: Install the package "plexmediaserver"
+  apt:
+    name: plexmediaserver
+    state: present

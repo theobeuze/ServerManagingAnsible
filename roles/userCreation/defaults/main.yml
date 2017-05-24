@@ -1,0 +1,4 @@
+---
+# defaults file for userCreation
+ssh_keys_directory: test/path
+key_name: id_rsa.pub

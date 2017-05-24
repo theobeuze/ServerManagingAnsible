@@ -1,0 +1,27 @@
+---
+# tasks file for userCreation
+- name: add theobeuze group
+  group:
+    name: theobeuze
+    state: present
+
+- name: add user theobeuze
+  user:
+    name: theobeuze
+    comment: "First Operator"
+    system: yes
+    groups: theobeuze,sudo
+    shell: /bin/bash
+    state: present
+
+- name: Allow sudo for theobeuze
+  template:
+    src: allow-sudo.conf.j2
+    dest: /etc/sudoers.d/theobeuze-init-user
+    owner: root
+
+- name: Set authorized key
+  authorized_key:
+    user: theobeuze
+    state: present
+    key: "{{ lookup('file', ssh_keys_directory + '/' + key_name) }}"

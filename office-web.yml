@@ -1,0 +1,10 @@
+---
+
+- hosts: office-web
+  become: yes
+  roles:
+#    - userCreation
+#    - setHostname
+#    - installDocker
+#    - installPlex
+    - installRancher

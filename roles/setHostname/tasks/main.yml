@@ -1,0 +1,11 @@
+---
+# tasks file for setHostname
+- name: Set hostname
+  hostname:
+    name: "{{ hostname }}"
+
+- name: Update /etc/hosts
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+    owner: root
