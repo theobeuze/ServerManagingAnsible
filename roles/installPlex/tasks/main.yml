@@ -11,6 +11,26 @@
     dest: /etc/apt/sources.list.d/plex.list
     owner: root
 
+- name: Add deb-multimedia.list in sources.list.d
+  template:
+    src: deb-multimedia.list.j2
+    dest: /etc/apt/sources.list.d/deb-multimedia.list
+    owner: root
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
+- name: Update all packages to the latest version
+  apt:
+    upgrade: dist
+
+- name: Install package deb-multimedia
+  apt:
+    name: deb-multimedia-keyring
+    state: present
+    allow_unauthenticated: yes
+
 - name: Run the equivalent of "apt-get update" as a separate step
   apt:
     update_cache: yes
@@ -19,3 +39,8 @@
   apt:
     name: plexmediaserver
     state: present
+
+- name: Upgrade all packages to the latest version
+  apt:
+    name: "*"
+    state: latest
