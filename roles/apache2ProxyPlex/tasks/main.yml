@@ -1,0 +1,25 @@
+---
+# tasks file for apache2ProxyPlex
+- name: Enable module proxy
+  apache2_module:
+    state: present
+    name: "{{ item }}"
+  with_items:
+    - proxy
+    - proxy_http
+
+- name: Create Apache conf file
+  template:
+    src: 001-plex.conf.j2
+    dest: /etc/apache2/sites-available/001-plex.conf
+    owner: root
+
+- name: Enable site
+  command: "a2ensite 001-plex.conf"
+  args:
+    chdir: /etc/apache2/sites-available/
+
+- name: reload apache2
+  systemd:
+    state: reloaded
+    name: apache2

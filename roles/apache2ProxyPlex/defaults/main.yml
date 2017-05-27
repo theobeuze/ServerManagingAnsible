@@ -1,0 +1,4 @@
+---
+# defaults file for apache2ProxyPlex
+virtual_hostname_1: my.test.me
+virtual_host_proxy_port_1: 9090
