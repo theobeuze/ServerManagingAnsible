@@ -1,0 +1,4 @@
+---
+# defaults file for apache2ProxyRancher
+virtual_hostname_2: my.test.me
+virtual_host_proxy_port_2: 9090

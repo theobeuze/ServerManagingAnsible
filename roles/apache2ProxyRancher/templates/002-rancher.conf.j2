@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+	ServerName {{ virtual_hostname_2 }}
+	ServerAlias www.{{ virtual_hostname_2 }}
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+  <IfModule mod_headers.c>
+    Header always set X-FRAME-OPTIONS "DENY"
+    Header set Content-Security-Policy "script-src 'self' https://www.google.com"
+    Header set X-Content-Type-Options nosniff
+    Header set X-XSS-Protection "1; mode=block"
+  </IfModule>
+
+  #HTTP proxy/gateway server
+  ProxyRequests off
+  ProxyPass / http://0.0.0.0:{{ virtual_host_proxy_port_2 }}/
+  ProxyPassReverse / http:/0.0.0.0:{{ virtual_host_proxy_port_2 }}/
+</VirtualHost>

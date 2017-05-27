@@ -1,0 +1,17 @@
+---
+# tasks file for apache2ProxyRancher
+- name: Create Apache conf file
+  template:
+    src: 002-rancher.conf.j2
+    dest: /etc/apache2/sites-available/002-rancher.conf
+    owner: root
+
+- name: Enable site
+  command: "a2ensite 002-rancher.conf"
+  args:
+    chdir: /etc/apache2/sites-available/
+
+- name: reload apache2
+  systemd:
+    state: reloaded
+    name: apache2
