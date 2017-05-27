@@ -1,0 +1,14 @@
+---
+- name: Install prerequirements packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - apache2
+    - apache2-utils
+
+- name: Run and enable Apache2 if not running
+  systemd:
+    state: started
+    name: apache2
+    enabled: yes
