@@ -1,0 +1,29 @@
+---
+# tasks file for installAria2
+- name: install dependencies
+  pip:
+    name: docker-compose
+
+- name: Create all the directories
+  file:
+    path: /home/aria2/config
+    state: directory
+    mode: 0755
+    owner: theobeuze
+
+- name: Create Aria2 conf file
+  template:
+    src: aria2.conf.j2
+    dest: /home/aria2/config/aria2.conf
+    owner: theobeuze
+
+- name: Create docker-compose file
+  template:
+    src: docker-compose.yml.j2
+    dest: /home/aria2/docker-compose.yml
+    owner: theobeuze
+
+- name: Install aria2 with inline v2 compose
+  docker_service:
+    project_name: aria2
+    project_src: /home/aria2

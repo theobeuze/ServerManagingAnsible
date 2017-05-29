@@ -1,0 +1,5 @@
+---
+# defaults file for installAria2
+token_aria2: changeme
+uid: 1000
+gid: 1001

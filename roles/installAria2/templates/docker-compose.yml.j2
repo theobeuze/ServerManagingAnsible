@@ -1,0 +1,14 @@
+aria2:
+    image: opengg/aria2
+    command:
+      -u={{ uid }}:{{ gid }}
+    ports:
+        - 6800:6800
+    volumes:
+        - /home/aria2/config:/config:rw
+        - /home/plex:/downloads:rw
+
+webui-aria2:
+    image: timonier/webui-aria2
+    ports:
+        - 82:80
