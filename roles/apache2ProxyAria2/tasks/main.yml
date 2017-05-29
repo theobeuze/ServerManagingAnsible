@@ -1,0 +1,27 @@
+---
+# tasks file for apache2ProxyAria2
+- name: Install latest passlib with pip
+  pip:
+    name: passlib
+
+- htpasswd:
+    path: "{{ aria2_pwd_file_path }}"
+    state: present
+    name: theobeuze
+    password: "{{ aria2_pwd }}"
+
+- name: Create Apache conf file
+  template:
+    src: 003-aria2.conf.j2
+    dest: /etc/apache2/sites-available/003-aria2.conf
+    owner: root
+
+- name: Enable site
+  command: "a2ensite 003-aria2.conf"
+  args:
+    chdir: /etc/apache2/sites-available/
+
+- name: reload apache2
+  systemd:
+    state: reloaded
+    name: apache2

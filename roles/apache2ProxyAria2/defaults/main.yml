@@ -1,0 +1,6 @@
+---
+# defaults file for apache2ProxyAria2
+virtual_hostname_3: my.test.me
+virtual_host_proxy_port_3: 9090
+aria2_pwd_file_path: path/to/file
+aria2_pwd: changeme
