@@ -7,4 +7,9 @@
 #    - setHostname
 #    - installDocker
 #    - installPlex
-    - installRancher
+#    - installRancher
+#    - installApache2
+#    - apache2ProxyPlex
+#    - apache2ProxyRancher
+#    - installAria2
+#    - apache2ProxyAria2
